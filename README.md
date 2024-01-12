@@ -17,7 +17,7 @@ This is a simple chat application using Socket.IO with FastAPI as the backend an
 
    ```bash
    pip install fastapi "python-socketio[asgi]" uvicorn
-```
+   ```
 
 ## Running the Application
 
