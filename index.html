@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.IO Client</title>
+</head>
+<body>
+    <h2>Socket.IO Test</h2>
+
+    <!-- Message input and send button -->
+    <input type="text" id="messageInput" placeholder="Type a message">
+    <button id="sendButton">Send</button>
+
+    <!-- Area to display received messages -->
+    <div id="messages"></div>
+
+    <!-- Load the Socket.IO Client Library -->
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script>
+        // Connect to the Socket.IO server
+        const socket = io('http://localhost:8000');
+
+        // Event handler for receiving a message from the server
+        socket.on('message_from_server', function (data) {
+            const messagesDiv = document.getElementById('messages');
+            messagesDiv.innerHTML += `<p>${data}</p>`;
+        });
+
+        // Send a message to the server when the button is clicked
+        document.getElementById('sendButton').addEventListener('click', function () {
+            const messageInput = document.getElementById('messageInput');
+            const message = messageInput.value;
+            socket.emit('message_from_client', message);
+            messageInput.value = '';  // Clear the input
+        });
+    </script>
+</body>
+</html>
